@@ -1,0 +1,16 @@
+version: '2'
+services:
+  lamtuthien-nginx:
+    image: sandinh/nginx-lamtuthien
+    network_mode: host
+    volumes:
+    - /etc/localtime:/etc/localtime:ro
+    - /etc/timezone:/etc/timezone:ro
+    - /etc/letsencrypt:/etc/letsencrypt:ro
+    - /var/www/html/domains/lamtuthien.net/public_html/:/var/www/html/
+    links:
+    - lamtuthien:lamtuthien
+    labels:
+      io.rancher.scheduler.affinity:host_label: host.id=tuthien
+      io.rancher.container.dns: 'true'
+      io.rancher.container.pull_image: always
